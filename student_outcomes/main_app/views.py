@@ -9,13 +9,16 @@ from .models import Project
 
 # Define the home view
 def home(request):
-  return HttpResponse('homepage')
+  return render(request, 'home.html')
 
 def profile(request):
   return render(request, 'profile.html')
 
 def projects(request):
   return render(request, 'projects.html')
+
+def index(request):
+  return render(request, 'index.html')
 
 
 def student(request, student_id):
