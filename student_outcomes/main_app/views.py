@@ -32,6 +32,26 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+class StudentCreate(LoginRequiredMixin, CreateView):
+  model = Student
+  fields = '__all__'
+
+  def form_valid(self, form):
+    # Assign the logged in user (self.request.user)
+    form.instance.user = self.request.user  # form.instance is the cat
+    # Let the CreateView do its job as usual
+    form.save()
+    return super().form_valid(form)
+
+class ProfileCreate(CreateView):
+  model = Profile
+  fields = '__all__'
+
+class ProjectCreate(CreateView):
+  model = Project
+  fields = '__all__'
+
+
 def home(request):
   return render(request, 'home.html')
 
@@ -43,12 +63,12 @@ def projects(request):
 
 def index(request):
   students = Student.objects.all()
-  return render(request, 'index.html', { 'students': student })
+  return render(request, 'index.html', { 'students': students })
 
-
-def student(request, student_id):
-  student = Student.objects.get(id=student_id)
+@login_required
+def detail(request, student_id):
+  detail = Student.objects.get(id=student_id)
   # instantiate FeedingForm to be rendered in the template
-  return render(request, 'student/detail.html', { 'students': student })
+  return render(request, 'detail.html', { 'detail': detail })
 
 # Create your views htere.

@@ -28,13 +28,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='student',
             name='name',
-            field=models.CharField(default=django.utils.timezone.now, max_length=100),
+            field=models.CharField(default=1, max_length=100),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='student',
             name='mobile',
-            field=models.IntegerField(default=django.utils.timezone.now),
+            field=models.IntegerField(default=1),
             preserve_default=False,
         ),
     ]
