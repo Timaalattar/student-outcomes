@@ -43,13 +43,38 @@ class StudentCreate(LoginRequiredMixin, CreateView):
     form.save()
     return super().form_valid(form)
 
+class StudentUpdate(UpdateView):
+  model = Student
+  fields = '__all__'
+
+class StudentDelete(DeleteView):
+  model = Student
+  success_url = '/index/'
+
 class ProfileCreate(CreateView):
   model = Profile
   fields = '__all__'
 
+class ProfileUpdate(UpdateView):
+  model = Student
+  fields = '__all__'
+
+class ProfileDelete(DeleteView):
+  model = Student
+  success_url = '/index/'
+
+
 class ProjectCreate(CreateView):
   model = Project
   fields = '__all__'
+
+class ProjectUpdate(UpdateView):
+  model = Student
+  fields = '__all__'
+
+class ProjectDelete(DeleteView):
+  model = Student
+  success_url = '/index/'
 
 
 def home(request):
@@ -65,10 +90,13 @@ def index(request):
   students = Student.objects.all()
   return render(request, 'index.html', { 'students': students })
 
-@login_required
 def detail(request, student_id):
   detail = Student.objects.get(id=student_id)
   # instantiate FeedingForm to be rendered in the template
   return render(request, 'detail.html', { 'detail': detail })
+
+def projects(request):
+ projects = Project.objects.all()
+  return render(request, 'projects.html', { 'projects': projects })
 
 # Create your views htere.

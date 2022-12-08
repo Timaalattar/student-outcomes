@@ -23,7 +23,7 @@
                     <li><a href="{% url 'index' %}">View All Students</a></li>
                     
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'detail' %}">Student</a></li>
+                        {% comment %} <li><a href="{% url 'detail' %}">Student</a></li> {% endcomment %}
                         <li><a href="{% url 'student_create' %}">Create Student</a></li>
                         <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}
